@@ -55,12 +55,25 @@ function Car(model,milesPerGallon) {
 this.model = model;
 this.milesPerGallon = milesPerGallon;
 this.tank = 0;
+this.odometer = 0;
 }
 
 Car.prototype.fill = function(gallons){
 return this.tank += gallons;
 }
+Car.prototype.drive = function(distance){
+   
+   const usedMiles = this.tank * this.milesPerGallon;
+   if(distance <= usedMiles){
+    this.odometer += dist;
+    this.tank -= (dist/this.milesPerGallon);
+   }else{
+    this.odometer += usedMiles;
+    this.tank = 0;
+    return `I ran out of fuel at ${this.odometer} miles`
+   }
 
+  }
 
 
 /*
@@ -71,9 +84,13 @@ return this.tank += gallons;
         + Should return a string "Playing with x", x being the favorite toy.
 */
 
-function Baby(babyAttrs) {
-Person.call(this,babyAttrs);
-this.favoriteToy = babyAttrs.favoriteToy;
+function Baby(name,age,favoriteToy) {
+Person.call(this,name,age);
+this.favoriteToy = favoriteToy;
+}
+Baby.prototype = Object.create(Person.prototype);
+Baby.prototype.play = function() {
+  return `Playing with ${this.favoriteToy}`;
 }
 
 
@@ -81,10 +98,10 @@ this.favoriteToy = babyAttrs.favoriteToy;
 /* 
   TASK 4
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. Window binding is when the value of this is on the window/console object.
+  2. Implicit Binding is when "this" is the object to the left of the dot function.
+  3. New Binding is when this is within a constructor and refers to the specific instance.
+  4. Explicit binding is when call or bind are used.
 */
 
 ///////// END OF CHALLENGE /////////
